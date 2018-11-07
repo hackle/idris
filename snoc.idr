@@ -8,7 +8,7 @@ appendNilNeut (x :: xs) = let hypo = appendNilNeut xs in rewrite hypo in Refl
 
 appendAssoc : (lefts: List a) -> (mid: List a) -> (rights: List a) -> lefts ++ (mid ++ rights) = (lefts ++ mid) ++ rights
 appendAssoc [] mid rights = Refl
-appendAssoc (x :: xs) mid rights = let hypo = appendAssoc xs mid rights in rewrite hypo in Refl
+appendAssoc (x :: xs) mid rights = rewrite appendAssoc xs mid rights in Refl
 
 snocListAccu : {lefts: List a} -> SnocList lefts -> (rights: List a) -> SnocList (lefts++rights)
 snocListAccu {lefts = lefts} slst [] = rewrite appendNilNeut lefts in slst
